@@ -166,41 +166,17 @@
                   <form id="signform" action="https://jcb-report-template.herokuapp.com/" method="post">
                     <div class="row">
                       
-					  <div class="col-md-8">
+					  <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Username</label>
                           <input type="text" class="form-control" name="uname" id="uname" required>
                         </div>
                       </div>
-					  <div class="col-md-3">
-                        <div class="form-check form-check-radio">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="role" id="roleseller" value="seller" required>
-								Salesperson
-								<span class="circle">
-									<span class="check"></span>
-								</span>
-							</label>
-						</div>
-                      </div>
-                    </div>
-					<div class="row">
-                      <div class="col-md-8">
+					  <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Password</label>
                           <input type="password" class="form-control" name="pwd" id="pwd" required>
                         </div>
-                      </div>
-					  <div class="col-md-3">
-                        <div class="form-check form-check-radio">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="role" id="rolestockclerk" value="stockclerk" required>
-								Stock Clerk
-								<span class="circle">
-									<span class="check"></span>
-								</span>
-							</label>
-						</div>
                       </div>
                     </div>
 					<div class="row">
@@ -215,6 +191,31 @@
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating text-danger d-none" id="matchpwd">Password not match</label>
                         </div>
+                      </div>
+                    </div>
+					
+					<div class="row">
+                      <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="role" id="roleseller" value="seller" required>
+								Salesperson
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+                      </div>
+					  <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="role" id="rolestockclerk" value="stockclerk" required>
+								Stock Clerk
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
                       </div>
                     </div>
 					<div class="row">
