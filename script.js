@@ -162,12 +162,16 @@
 	  $('#signup').click(signup);
     });
 	
-function post(router, id, data) {
+function post(router, id, data, end) {
     const baseurl = 'https://jcbdbserver.herokuapp.com/';
     data.id = id;
-    $.post((baseurl + router), data, function () {
+    const req = $.post((baseurl + router), data, function () {
         alert('success');
-    }).fail(function() {alert('fail');});
+    }).fail(function() {
+		if(req.status == 500) {
+			alert('Already signed up');
+		} else alert('fail');
+	}).always(end);
 }
 
 function del(id) {
@@ -188,33 +192,65 @@ function signin() {
 	const name = $('#uname').val().toLowerCase();
 	const pwd = $('#pwd').val().toLowerCase();
 
-	if(name == '' || pwd == '') {
-		
-		return;
-	}
+	if(!checkValidation()) return;
+	
+	const spinner = $(this).children('span');
+	spinner.toggleClass('spinner-border');
 	
 	const url = 'https://jcbdbserver.herokuapp.com/staff/';
 	const id = name + pwd;
 	$.get(url+id, function(data, status) {
-		location.replace('https://jcb-report-template.herokuapp.com');
+		$('#signform').submit();
 	}).fail(function(){
 		alert('fail');
+	}).always(function() {
+		spinner.toggleClass('spinner-border');
 	});
 }
+
 
 function signup() {
 	const name = $('#uname').val().toLowerCase();
 	const pwd = $('#pwd').val().toLowerCase();
 	const cpwd = $('#cpwd').val().toLowerCase();
 	const id = name + pwd;
-	if(name == '' || pwd == '' || cpwd == '') {
-		alert('Require username and password');
-		return;
-	}
-	if(pwd != cpwd) {
-		alert('Password not match');
-		return;
-	}
+
+	if(!checkValidation('signup')) return;
 	
-	post('staff', id, {name, pwd});
+	if(pwd != cpwd) {
+		$('#matchpwd').removeClass('d-none');
+		return;
+	} else $('#matchpwd').addClass('d-none');
+	
+	const spinner = $(this).children('span');
+	spinner.toggleClass('spinner-border');
+	
+	post('staff', id, {name, pwd}, function(){
+		spinner.toggleClass('spinner-border')
+	});
+}
+
+function checkValidation(e) {
+	let valid = true;
+	
+	let input = $('#uname, #pwd');
+	if(e == 'signup') input = $('#uname, #pwd, #cpwd');
+	
+	$(input).each((idx, i) => {
+		const l = $(i).siblings('label');
+		if($(i).val() == '') {
+			valid = false;
+			if(!$(l).attr('class').includes('text-danger')) {
+				$(l).toggleClass('text-danger');
+				$(l).text('Require ' + $(l).text());
+			}
+		} else {
+			if($(l).attr('class').includes('text-danger')) {
+				$(l).toggleClass('text-danger');
+				$(l).text($(l).text().replace('Require ', ''));
+			}
+		}
+	});
+	
+	return valid;
 }

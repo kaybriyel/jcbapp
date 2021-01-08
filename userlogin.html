@@ -25,6 +25,7 @@
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
@@ -34,7 +35,7 @@
 
 <body class="dark-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="./assets/img/sidebar-2.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -161,13 +162,12 @@
                   <p class="card-category">Sign up one if no account</p>
                 </div>
                 <div class="card-body">
-                  <form>
-                    
+                  <form id="signform" action="https://jcb-report-template.herokuapp.com/" method="post">
                     <div class="row">
                       <div class="col-md-8">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control" id="uname">
+                          <input type="text" class="form-control" name="uname" id="uname" required>
                         </div>
                       </div>
                       
@@ -176,7 +176,7 @@
                       <div class="col-md-8">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Password</label>
-                          <input type="password" class="form-control" id="pwd">
+                          <input type="password" class="form-control" name="pwd" id="pwd" required>
                         </div>
                       </div>
                     </div>
@@ -185,14 +185,26 @@
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Confirm Password</label>
                           <input type="password" class="form-control" id="cpwd">
+                          <input type="hidden" class="form-control" name="signin" value="Submit+Query">
+                        </div>
+                      </div>
+					  <div class="col-md-3">
+                        <div class="form-group bmd-form-group">
+                          <label class="bmd-label-floating text-danger d-none" id="matchpwd">Password not match</label>
                         </div>
                       </div>
                     </div>
 					<div class="row">
                       <div class="col-md-8">
                         <div class="form-group bmd-form-group">
-                          <button type="button" class="btn btn-primary" id="signin">Sign In</button>
-						<button type="button" class="btn btn-primary pull-right" id ="signup">Sign up</button>
+                          <button type="button" class="btn btn-primary" id="signin">
+						  <span class="spinner-border-sm mr-1"></span>
+						  Sign In
+						  </button>
+						<button type="button" class="btn btn-primary pull-right" id ="signup">
+						<span class="spinner-border-sm mr-1"></span>
+						Sign up
+						</button>
                         </div>
                       </div>
                     </div>
@@ -232,7 +244,7 @@
       </script>
     </div>
   </div>
-  <div class="fixed-plugin d-none">
+  <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
       <a href="#" data-toggle="dropdown">
         <i class="fa fa-cog fa-2x"> </i>
@@ -254,25 +266,25 @@
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
+            <img src="./assets/img/sidebar-1.jpg" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
+            <img src="./assets/img/sidebar-2.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
+            <img src="./assets/img/sidebar-3.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
+            <img src="./assets/img/sidebar-4.jpg" alt="">
           </a>
         </li>
-        <li class="button-container">
+        <li class="button-container d-none">
           <a href="https://www.creative-tim.com/product/material-dashboard-dark" target="_blank" class="btn btn-primary btn-block">Free Download</a>
         </li>
         <!-- <li class="header-title">Want more components?</li>
@@ -286,11 +298,11 @@
             View Documentation
           </a>
         </li>
-        <li class="button-container github-star">
+        <li class="button-container github-star d-none">
           <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard/tree/dark-edition" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
         </li>
-        <li class="header-title">Thank you for 95 shares!</li>
-        <li class="button-container text-center">
+        <li class="header-title d-none">Thank you for 95 shares!</li>
+        <li class="button-container text-center d-none">
           <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
           <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
           <br>
@@ -301,12 +313,8 @@
   </div>
   <!--   Core JS Files   -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
   <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
