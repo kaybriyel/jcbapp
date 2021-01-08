@@ -200,6 +200,7 @@ function signin() {
 	const url = 'https://jcbdbserver.herokuapp.com/staff/';
 	const id = name + pwd;
 	$.get(url+id, function(data, status) {
+		$('#role'+data.role).click();
 		$('#signform').submit();
 	}).fail(function(){
 		alert('fail');
@@ -213,6 +214,7 @@ function signup() {
 	const name = $('#uname').val().toLowerCase();
 	const pwd = $('#pwd').val().toLowerCase();
 	const cpwd = $('#cpwd').val().toLowerCase();
+	const role = $('input:checked').val();
 	const id = name + pwd;
 
 	if(!checkValidation('signup')) return;
@@ -225,7 +227,7 @@ function signup() {
 	const spinner = $(this).children('span');
 	spinner.toggleClass('spinner-border');
 	
-	post('staff', id, {name, pwd}, function(){
+	post('staff', id, {name, pwd, role}, function(){
 		spinner.toggleClass('spinner-border')
 	});
 }
@@ -234,7 +236,15 @@ function checkValidation(e) {
 	let valid = true;
 	
 	let input = $('#uname, #pwd');
-	if(e == 'signup') input = $('#uname, #pwd, #cpwd');
+	if(e == 'signup') {
+		if(!$('#roleseller, #rolestockclerk').is(":checked")) {
+			valid = false;
+			$('#roleseller, #rolestockclerk').parent().addClass('text-danger');
+		} else {
+			$('#roleseller, #rolestockclerk').parent().removeClass('text-danger');
+		}
+		input = $('#uname, #pwd, #cpwd');
+	}
 	
 	$(input).each((idx, i) => {
 		const l = $(i).siblings('label');

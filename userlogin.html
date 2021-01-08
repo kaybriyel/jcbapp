@@ -162,15 +162,27 @@
                   <p class="card-category">Sign up one if no account</p>
                 </div>
                 <div class="card-body">
+				<!-- https://jcb-report-template.herokuapp.com/ -->
                   <form id="signform" action="https://jcb-report-template.herokuapp.com/" method="post">
                     <div class="row">
-                      <div class="col-md-8">
+                      
+					  <div class="col-md-8">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Username</label>
                           <input type="text" class="form-control" name="uname" id="uname" required>
                         </div>
                       </div>
-                      
+					  <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="role" id="roleseller" value="seller" required>
+								Salesperson
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+                      </div>
                     </div>
 					<div class="row">
                       <div class="col-md-8">
@@ -178,6 +190,17 @@
                           <label class="bmd-label-floating">Password</label>
                           <input type="password" class="form-control" name="pwd" id="pwd" required>
                         </div>
+                      </div>
+					  <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="role" id="rolestockclerk" value="stockclerk" required>
+								Stock Clerk
+								<span class="circle">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
                       </div>
                     </div>
 					<div class="row">
@@ -315,20 +338,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="./assets/script-js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="./assets/script-js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!--  Google Maps Plugin    -->
   <!-- Chartist JS -->
-  <!-- <script src="../assets/js/plugins/chartist.min.js"></script> -->
+  <!-- <script src="./assets/script-js/plugins/chartist.min.js"></script> -->
   <!--  Notifications Plugin    -->
-  <!-- <script src="../assets/js/plugins/bootstrap-notify.js"></script> -->
+  <!-- <script src="./assets/script-js/plugins/bootstrap-notify.js"></script> -->
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="./assets/script-js/material-dashboard.js?v=2.1.0"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <!-- <script src="../assets/demo/demo.js"></script> -->
+  <!-- <script src="./assets/demo/demo.js"></script> -->
   <script src="./script.js"></script>
 </body>
 
