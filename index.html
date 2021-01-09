@@ -158,14 +158,16 @@
             <div class="col-md-8">
 				<div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Sign In</h4>
+                 <div class="d-inline-block">
+				  <h4 class="card-title">Sign In</h4>
                   <p class="card-category">Sign up one if no account</p>
+				 </div>
+				 <button class="btn pull-right" id="signup">Sign Up</button>
                 </div>
                 <div class="card-body">
-				<!-- https://jcb-report-template.herokuapp.com/ -->
-                  <form id="signform" action="https://jcb-report-template.herokuapp.com/" method="post">
-                    <div class="row">
-                      
+				
+                  <form id="signform" action="login" method="post">
+					<div class="row">
 					  <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Username</label>
@@ -179,22 +181,22 @@
                         </div>
                       </div>
                     </div>
-					<div class="row">
-                      <div class="col-md-8">
+					<div class="row d-none">
+					  <div class="col-md-6">
+                        <div class="form-group bmd-form-group">
+                          <label class="bmd-label-floating">Full Name</label>
+                          <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                      </div>
+					  <div class="col-md-6 d-none">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">Confirm Password</label>
                           <input type="password" class="form-control" id="cpwd">
-                          <input type="hidden" class="form-control" name="signin" value="Submit+Query">
-                        </div>
-                      </div>
-					  <div class="col-md-3">
-                        <div class="form-group bmd-form-group">
-                          <label class="bmd-label-floating text-danger d-none" id="matchpwd">Password not match</label>
                         </div>
                       </div>
                     </div>
 					
-					<div class="row">
+					<div class="row d-none">
                       <div class="col-md-3">
                         <div class="form-check form-check-radio">
 							<label class="form-check-label">
@@ -217,15 +219,18 @@
 							</label>
 						</div>
                       </div>
+					  <div class="col-md-3">
+                        <small class="form-check-label text-danger pt-1 d-none" id="matchpwd">*Password not match</small>
+                      </div>
                     </div>
 					<div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <div class="form-group bmd-form-group">
-                          <button type="button" class="btn btn-primary" id="signin">
+                          <button type="submit" class="btn btn-primary" id="signin">
 						  <span class="spinner-border-sm mr-1"></span>
 						  Sign In
 						  </button>
-						<button type="button" class="btn btn-primary pull-right" id ="signup">
+						<button type="button" class="btn btn-primary pull-right d-none" id ="submitsignup">
 						<span class="spinner-border-sm mr-1"></span>
 						Sign up
 						</button>

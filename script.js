@@ -1,4 +1,6 @@
-    $(document).ready(function() {
+const baseurl = 'https://jcb-report-template.herokuapp.com/';
+	
+	$(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
 
@@ -158,12 +160,18 @@
         });
       });
 	  
-	  $('#signin').click(signin);
-	  $('#signup').click(signup);
+	  // $('#signin').click(signin);
+	  $('#signform div.d-none input').removeAttr('required');
+	  
+	  $('#signup').click(function() {
+		  $('#signform div.d-none').toggleClass('d-none');
+		  $('#submitsignup').toggleClass('d-none');
+		  $(this).toggleClass('d-none');
+	  });
+	  $('#submitsignup').click(signup);
     });
 	
 function post(router, id, data, end) {
-    const baseurl = 'https://jcbdbserver.herokuapp.com/';
     data.id = id;
     const req = $.post((baseurl + router), data, function () {
         alert('success');
@@ -175,10 +183,9 @@ function post(router, id, data, end) {
 }
 
 function del(id) {
-    const baseurl = 'https://jcbdbserver.herokuapp.com/staff/';
     $.ajax({
         method: 'DELETE',
-        url: baseurl + id,
+        url: baseurl + 'staff/' + id,
         success: function () {
             alert('success');
         },
@@ -197,8 +204,8 @@ function signin() {
 	const spinner = $(this).children('span');
 	spinner.toggleClass('spinner-border');
 	
-	const url = 'https://jcbdbserver.herokuapp.com/staff/';
 	const id = name + pwd;
+	const url = baseurl + 'staff/';
 	$.get(url+id, function(data, status) {
 		$('#role'+data.role).click();
 		$('#signform').submit();
@@ -209,13 +216,13 @@ function signin() {
 	});
 }
 
-
 function signup() {
-	const name = $('#uname').val().toLowerCase();
+	const uname = $('#uname').val().toLowerCase();
+	const name = $('#name').val();
 	const pwd = $('#pwd').val().toLowerCase();
 	const cpwd = $('#cpwd').val().toLowerCase();
 	const role = $('input:checked').val();
-	const id = name + pwd;
+	const id = (uname + pwd).replace(/ /g, '');
 
 	if(!checkValidation('signup')) return;
 	
@@ -227,7 +234,7 @@ function signup() {
 	const spinner = $(this).children('span');
 	spinner.toggleClass('spinner-border');
 	
-	post('staff', id, {name, pwd, role}, function(){
+	post('staff', id, {name, uname, pwd, role}, function(){
 		spinner.toggleClass('spinner-border')
 	});
 }
@@ -243,7 +250,7 @@ function checkValidation(e) {
 		} else {
 			$('#roleseller, #rolestockclerk').parent().removeClass('text-danger');
 		}
-		input = $('#uname, #pwd, #cpwd');
+		input = $('#uname, #pwd, #cpwd, #name');
 	}
 	
 	$(input).each((idx, i) => {
